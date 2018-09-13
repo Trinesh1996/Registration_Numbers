@@ -1,0 +1,76 @@
+<div class="container-fluid padding">
+    <div class="row">      
+        <div class="col">
+            <h1>Registration</h1>
+            <hr>           
+        </div>        
+    </div>
+</div>
+
+<form class="" action="/registration" method="post">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col border ">
+            <label class="font-italic lead">RISGISTRATION NUMBER:</label>
+            <input type="text" name="regNum" value="{{numbers}}" placeholder="..." class="regText margin-top margin-left">
+            <input class="btn btn-outline-warning margin-left" type="submit" value="Add"></input>
+            
+        </div>
+    </div>  
+</div>
+
+<div class="row">
+    <div class="col-1">
+        <button class="btn btn-outline-warning dropdown-toggle margin-top" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show towns</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="CA">Cape Town</a>
+                <a class="dropdown-item" href="CY">Bellville</a>
+                <a class="dropdown-item" href="CL">Paarl</a>
+                <a class="dropdown-item" href="CJ">Stellenbosch</a>
+                <a class="dropdown-item" href="CK">George</a>
+            </div>
+        </div>
+    </div>
+
+{{!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col border margin-top">
+      <h5>Select Town</h5>
+    <hr>
+
+    <label class="radio-inline"> 
+      <input type="radio" name="TownName" id="TownNameRadio" value="Bellville">
+      <span class="label-body">Bellville</span>      
+    </label>
+
+      <label class="radio-inline">
+      <input type="radio" name="TownName" id="TownNameRadio" value="Paarl">
+      <span class="label-body">Paarl</span>
+      </label>
+
+    <label class="radio-inline">
+      <input type="radio" name="TownName" id="TownNameRadio" value="CapeTown">
+      <span class="label-body">Cape Town</span>      
+    </label> --}}
+        
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+<div class="container-fluid margin-top">
+    <div class="row">
+        <div class="col-1   ">
+            <a href="/reset"><button class="btn btn-outline-secondary" type="submit" name="button">Reset</button></a>
+
+        </div>
+    </div>
+</div>
+
+
+
+ 
+

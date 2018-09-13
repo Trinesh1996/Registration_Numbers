@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c");
+* {
+    box-sizing: border-box;
+    text-align: center;
+    
+  }
+  body {
+    background-color: aliceblue;
+  }
+  img{
+    max-width: 100%;  
+  }
+
+  .padding {
+    padding-top: 1.5em;
+  }
+
+  .buttons {
+    padding-left: 2em;
+  }
+
+  .margin-top {
+    margin-top: 1.5em;
+  }
+  .margin-left {
+    margin-left: 1.5em;
+  }
+  .border {
+    border-style: solid;
+    border-width: 2em;
+    border-color: goldenrod;
+    padding: 2em;
+    max-width: 60%;
+    background-color: lightsteelblue;
+  }
+  .btn-outline-warning {
+    color: black;
+    border-color: lavenderblush; 
+  
+  }
+  .regText {
+    width: 30%;
+  }
+
+  
