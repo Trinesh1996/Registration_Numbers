@@ -33,22 +33,6 @@ module.exports = function (pool) {
 		};
 
 		let town = await pool.query("select town from cities where town = $1", [town]);
-
-
-
-		
-
-
-		
-
-		
-
-
-
-
-
-
-
 	}		
 
 
