@@ -10,7 +10,7 @@ const express = require("express"),
 
 // init modules, env , port
 let app = express(),
-    PORT = process.env.PORT || 3011;
+    PORT = process.env.PORT || 3010;
 
 
 // SSL connection
@@ -45,31 +45,52 @@ app.use(session({
 
 app.use(flash());   
 
-app.get("/", async function (req, res) {
-  res.render("home");
-})
+app.get("/", async function (req, res, next) {
+  let town = await pool.query("select * from cities");
+  let town_rows = town.rows;
 
-
-
-app.post("/registration", async function (req, res) {
-  let RegNumber = req.body.regNum;
-  console.log(RegNumber);
-  res.render("home")
-
+  res.render('home', {town_rows});
 });
 
-app.get("/reset", async function (req, res, next) {
-  try { 
-    await regNums.reset();
+
+app.post("/registration", async function (req, res, next) {  
+  try {
+
+    // Registration numbers
+  
+  let RegNumber = req.body.regNum;
+  var regprefix = RegNumber.substring(0, 2).trim();
+  var TAGS_USED = ['all', 'CA', 'CJ', 'CY', 'CF'];
+  let reg_plate = await regNums.addReg(RegNumber)
+  let reg_numbers = await pool.query("SELECT * from registration_numbers");   
+  let reg_rows = reg_numbers.rows;
+
+  // select towns
+
+  let town = await pool.query("select * from cities");
+  let town_rows = town.rows;
+
+  // errro messages
+
+  if(RegNumber == undefined || !TAGS_USED.includes(regprefix)) {
+    req.flash("error", "Please enter a valid registration number");
+  }
+  
+  res.render("home", {reg_rows, town_rows});
   }
   catch(err) {
-    console.log(err)
-  }
-  finally {
-    res.redirect("/");
-  }
-});
-  
+    console.log("error" + "" + err)
+    next(err)
+  }  
+});  
+
+
+
+
+app.get("/reset", async function (req, res, next) {
+  let reset = await regNums.reset();
+  res.redirect("/");
+})
 
 app.listen(PORT, function(){
   console.log('App starting on port', PORT)

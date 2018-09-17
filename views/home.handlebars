@@ -1,6 +1,6 @@
 <div class="container-fluid padding">
     <div class="row">      
-        <div class="col">
+        <div class="col-12">
             <h1>Registration</h1>
             <hr>           
         </div>        
@@ -8,67 +8,91 @@
 </div>
 
 <form class="" action="/registration" method="post">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col border ">
-            <label class="font-italic lead">RISGISTRATION NUMBER:</label>
-            <input type="text" name="regNum" value="{{numbers}}" placeholder="..." class="regText margin-top margin-left">
-            <input class="btn btn-outline-warning margin-left" type="submit" value="Add"></input>
-            
+<div class="container-fluid margin-top border">
+    <div class="form-group row well">
+
+        <label for="inputReg" class="col-sm-3 col-form-label">Registration Code</label>
+
+        <div class="col-sm-6">
+            <input type="text" id="inputReg" name="regNum" value="{{regs}}" placeholder="..." class="form-control margin-left color"></input>
         </div>
-    </div>  
-</div>
 
-<div class="row">
-    <div class="col-1">
-        <button class="btn btn-outline-warning dropdown-toggle margin-top" type="button" id="dropdownMenuButton"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show towns</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="CA">Cape Town</a>
-                <a class="dropdown-item" href="CY">Bellville</a>
-                <a class="dropdown-item" href="CL">Paarl</a>
-                <a class="dropdown-item" href="CJ">Stellenbosch</a>
-                <a class="dropdown-item" href="CK">George</a>
-            </div>
-        </div>
-    </div>
+        <div class="col-sm-1">
+            <input class="btn btn-success pull-right" type="submit" value="Add"></input> 
+        </div>  
+    </div> 
 
-{{!-- <div class="container-fluid">
-  <div class="row">
-    <div class="col border margin-top">
-      <h5>Select Town</h5>
-    <hr>
-
-    <label class="radio-inline"> 
-      <input type="radio" name="TownName" id="TownNameRadio" value="Bellville">
-      <span class="label-body">Bellville</span>      
-    </label>
-
-      <label class="radio-inline">
-      <input type="radio" name="TownName" id="TownNameRadio" value="Paarl">
-      <span class="label-body">Paarl</span>
-      </label>
-
-    <label class="radio-inline">
-      <input type="radio" name="TownName" id="TownNameRadio" value="CapeTown">
-      <span class="label-body">Cape Town</span>      
-    </label> --}}
+    <div class="form-group row">
+        <label for="inputPassword3" class="col-sm-3 col-form-label">Select Town</label>
         
+        <div class="col-sm-6">
+            <select class="custom-select margin-left" id="selectTown" name="display_town">
+                 
+                <option value="All">All</option>
+                {{#each town_rows}}               
+                <option value={{town}}>{{town}}</option> 
+                {{/each}}            
+            </select>
         </div>
     </div>
-</div>
+</div>    
 </form>
 
 
 
-<div class="container-fluid margin-top">
-    <div class="row">
-        <div class="col-1   ">
-            <a href="/reset"><button class="btn btn-outline-secondary" type="submit" name="button">Reset</button></a>
 
+<div class="container-fluid"> 
+    <div class="row">
+        <div class="col-12">
+           <button onclick="showReg()" class="btn btn-success pull-right margin-top">Show</button>
+           <button type="button" class="btn btn-warning margin-top" data-toggle="modal" data-target="#resetModal">Reset</button>
+         
+                <div id="regPlate">
+                    {{#each reg_rows}}
+                    <span class="plate">{{reg_number}}</span>
+                    {{/each}}
+                </div>
         </div>
     </div>
 </div>
+
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resetModalLabel">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    Are you sure you want to reset? Resetting will delete all registration numbers.
+                </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="/reset"><button class="btn btn-warning" type="submit" name="button">Reset</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <span class="">{{messages.error}}</span>
+    </div>
+</div>
+
+
 
 
 
