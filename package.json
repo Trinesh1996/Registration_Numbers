@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "directories": {
+    "test": "test"
   },
+
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,5 +22,9 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   }
-}
+  }
+
