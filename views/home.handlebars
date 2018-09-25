@@ -7,8 +7,10 @@
     </div>
 </div>
 
-<form class="" action="/registration" method="post">
+<form class="" action="/AddRegistration" method="post">
+
 <div class="container-fluid margin-top border">
+    
     <div class="form-group row well">
 
         <label for="inputReg" class="col-sm-3 col-form-label">Registration Code</label>
@@ -18,46 +20,69 @@
         </div>
 
         <div class="col-sm-1">
-            <input class="btn btn-success pull-right" type="submit" value="Add"></input> 
-        </div>  
-    </div> 
+            <input class="btn btn-success margin-left pull-right" type="submit" value="Add"></input> 
+        </div> 
+    </div>
+</div>
+</form> 
 
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-3 col-form-label">Select Town</label>
+<div class="container-fluid border">
+    
+<div class="form-group row">
+
+    <label for="inputPassword3" class="col-sm-3 col-form-label">Select Town</label>
         
         <div class="col-sm-6">
-            <select class="custom-select margin-left" id="selectTown" name="display_town">
-                 
-                <option value="All">All</option>
-                {{#each town_rows}}               
-                <option value={{town}}>{{town}}</option> 
-                {{/each}}            
+            <select onchange="filters()" class="custom-select margin-left" name="display_town">                 
+                <option value="All" name="All">All</option>
+                    {{#each filterTowns}}               
+                    <option value="{{town}}" {{selected}} name="town_row">{{town}}</option>
+                    {{/each}}            
             </select>
-        </div>
+        </div> 
     </div>
-</div>    
+
+<form class="" action="/AddTown" method="post"> 
+
+<div class="form-group row">
+    <label for="inputReg" class="col-sm-3 margin-top col-form-label">Town</label>
+    
+        <div class="col-3">
+            <input type="text" id="inputTown" name="town" value="{{town}}" placeholder="..." class="form-control margin-left margin-top color"></input>
+        </div>        
+
+        <label for="inputReg" class="margin-top-dec col-sm-1 margin-left">Tag</label>
+         <div class="col-sm-2">
+            <input type="text" id="inputRegPrefix" name="tag" value="{{tag}}" placeholder="..." class="form-control margin-top color"></input>
+        </div>
+
+        <div class="row">
+           <div class="col-1">
+            <input class="btn btn-success margin-top margin-left-dec" type="submit" value="Add"></input> 
+        </div>  
+        </div>
+        </div>    
 </form>
 
 
-
-
-<div class="container-fluid"> 
     <div class="row">
         <div class="col-12">
-           <button onclick="showReg()" class="btn btn-success pull-right margin-top">Show</button>
+           <button onclick="showReg()" class    ="btn btn-success pull-right margin-top">Show</button>
            <button type="button" class="btn btn-warning margin-top" data-toggle="modal" data-target="#resetModal">Reset</button>
          
                 <div id="regPlate">
                     {{#each reg_rows}}
                     <span class="plate">{{reg_number}}</span>
                     {{/each}}
+                    
+                    {{#each selectTown}}
+                    <span class="plate">{{reg_number}}</span>
+                    {{/each}}   
+                  
                 </div>
         </div>
     </div>
 </div>
-
-
-
 </div>
 
 
@@ -88,10 +113,21 @@
 
 <div class="container-fluid">
     <div class="row">
-        <span class="">{{messages.error}}</span>
+        <span class="">{{messages.msg}}</span>
     </div>
 </div>
 
+
+
+
+<script>
+
+    function filters(){
+        var town = document.querySelector('.custom-select').value;
+        location.href = '/filter/' + town
+    }
+
+</script>
 
 
 

@@ -12,7 +12,7 @@ create table cities(
 );
 
 
-insert into cities(id,town,regprefix) values (1,'Cape Town','CA');
+insert into cities(id,town,regprefix) values (1,'CapeTown','CA');
 insert into cities(id,town,regprefix) values (2,'Bellville','CY');
 insert into cities(id,town,regprefix) values (3,'Paarl','CJ');
 insert into cities(id,town,regprefix) values (4,'Stellenbosch','CL');

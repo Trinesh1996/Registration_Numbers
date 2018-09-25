@@ -22,15 +22,23 @@
   .margin-top {
     margin-top: 1.5em;
   }
+
+  .margin-top-dec {
+    margin-top: 2em;
+
+  }
   .margin-left {
     margin-left: 1.5em;
+  }
+  .margin-left-dec {
+    margin-left: 0.9em;
   }
   .border {
     border-style: solid;
     border-width: 4em;
     padding-top: 2em;
     padding-bottom: 2em;
-    max-width: 60%;    
+    max-width: 70%;    
 
 
   
