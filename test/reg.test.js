@@ -91,7 +91,7 @@ describe("Registration Tests", async function() {
         assert.deepEqual(await reg.getAllTowns("Paarl"),  [{ town: 'CapeTown', regprefix: 'CA' },
                                                             { town: 'Bellville', regprefix: 'CY' },
                                                             { town: 'Paarl', regprefix: 'CJ', selected: true},
-                                                            {town: "Stellenbosh", regprefix: "CL"}
+                                                            {town: "Stellenbosch", regprefix: "CL"}
                                                             ]);
 
         
