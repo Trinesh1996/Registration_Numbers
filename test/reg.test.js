@@ -15,8 +15,8 @@ const pool = new Pool({
 
 describe("Registration Tests", async function() {
     beforeEach(async function(){
-		await pool.query("DELETE FROM registration_numbers;");
-		await pool.query("ALTER SEQUENCE registration_numbers_id_seq RESTART 1;");
+		await pool.query("DELETE FROM registration_numbers");
+		await pool.query("ALTER SEQUENCE registration_numbers_id_seq RESTART 1");
     });
 
     it("should reset", async function() {
