@@ -11,9 +11,17 @@
 
 <div class="container-fluid border">
      <div class="row margin-bottom">
+
          <div class="col-sm-12 error-color">
              <span class="">{{messages.msg}}</span>
          </div>
+
+         
+            <div class="col-12 error-color">
+                <span class=""><strong>{{messages.msg-three}}</strong></span>
+            </div>
+        
+
 
           <div class="col-sm-12 error-color-2">
              <span class="">{{messages.msgTwo}}</span>
@@ -46,13 +54,13 @@
             <select onchange="filters()" class="custom-select margin-left" name="display_town">                 
                 <option value="All" name="All">All</option>
                     {{#each filterTowns}}               
-                    <option value="{{town}}" {{selected}} name="town_row">{{town}}</option>
+                    <option value="{{town}}" name="town_row">{{town}}</option>
                     {{/each}}            
             </select>
         </div> 
     </div>
 
-<form class="" action="/AddTown" method="post"> 
+{{!-- <form class="" action="/AddTown" method="post"> 
 
 <div class="form-group row">
     <label for="inputReg" class="col-sm-3 margin-top col-form-label">Town</label>
@@ -72,7 +80,7 @@
         </div>  
         </div>
         </div>    
-</form>
+</form> --}}
 
 
     <div class="row">
@@ -85,7 +93,7 @@
                     <span class="plate">{{reg_number}}</span>
                     {{/each}}
                     
-                    {{#each selectTown}}
+                    {{#each reg_row}}
                     <span class="plate">{{reg_number}}</span>
                     {{/each}}   
                   
@@ -119,18 +127,17 @@
   </div>
 </div>
 
-
-
-<div class="container-fluid">
-    <div class="row">
-        <span class="">{{messages.msg}}</span>
-    </div>
-</div>
-
-
-
-
 <script>
+
+
+    function showReg() {
+    var x = document.getElementById("regPlate");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 
     function filters(){
         var town = document.querySelector('.custom-select').value;

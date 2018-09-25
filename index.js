@@ -49,11 +49,8 @@ app.use(flash());
 
 app.get("/", async function (req, res, next) {
   try {
-
     // Keep town selection on screen
-    var filterTowns = await regNums.getAllTowns(); 
-
-
+    var filterTowns = await regNums.getAllTowns();
   res.render('home', {filterTowns});
   }
 
@@ -74,16 +71,24 @@ app.post("/AddRegistration", async function (req, res, next) {
     let reg_rows = await regNums.checkAllReg();
 
     // Keep town selection on screen
-    var filterTowns = await regNums.getAllTowns(); 
+    var filterTowns = await regNums.getAllTowns();
 
-
-
-    if(reg_plate) {
-      req.flash('msgTwo', 'added registration number succesfully')
+    if(reg_plate == true) {
+      req.flash('msgTwo', 'added registration number succesfully!')
     }
-    else {
-      req.flash('msg', 'Please enter a registration number that is available')
+
+    else if (reg_plate == false){
+      req.flash('msg', `Please enter a registration number with a valid format`);
+      req.flash('msg-three', `Eg: CY 123, CA 123, CL 123, CJ 123`)      
     }
+
+
+    if (reg_plate == undefined) {
+      req.flash("msg", "Registration number already exits")
+    } 
+
+    console.log(reg_plate)
+
 
     res.render('home', {reg_rows, filterTowns})
   }
@@ -94,85 +99,19 @@ app.post("/AddRegistration", async function (req, res, next) {
   }
 });
 
-
-    // var regprefix = RegNumber.substring(0, 2).trim();
-    // var TAGS_USED = ['All', 'CA', 'CJ', 'CY', 'CL'];
-
- 
-
-
-    // let reg_numbers = await pool.query("SELECT * from registration_numbers");
-    // let reg_rows = reg_numbers.rows;
-
-    // select towns
-    // let town = await pool.query("select * from cities");
-    // let town_rows = town.rows;
-
-
-    // errro messages
-    // if (RegNumber == undefined || !TAGS_USED.includes(regprefix)) {
-    //   req.flash("error", "Please enter a valid registration number");
-    // }
-
- 
-
-
-
-// app.post('/selectTown', async function (req, res, next) {
-//   try {
-//     let towns = req.body.display_town;
-
-//     let reg_number = await regNums.selectTown(towns);
-
-
-//    
-//     console.log(reg_number);
-
-   
-
-//     let town = await pool.query("select * from cities");
-//     let town_rows = town.rows;
-    
-
-//     res.render('home', { town_rows, popReg});
-//   }
-//   catch (err) {
-//     console.log("error" + "" + err)
-//     next(err)
-//   }
-// });
-
-
-
 app.get('/filter/:town', async function (req ,res, next) {
   try {
     let towns =  req.params.town;
     
     var filterTowns = await regNums.getAllTowns(towns); 
-    // var reg_rows = await regNums.filterTown(towns) 
+    var reg_row = await regNums.getTown(towns); 
 
 
     let town = await pool.query("select * from cities");
-    let town_rows = town.rows;  
+    let town_rows = town.rows;
+	
 
-    let reg_number = await pool.query("SELECT * from registration_numbers");
-    let reg_numbers = reg_number.rows;
-
-    console.log(reg_numbers)  
-
-    let city_id = await pool.query("select id from cities where regprefix = 'CA'");
-
-
-    let current = [];
-
-    for (var i = 0; i<reg_numbers.length; i++) {
-      if (reg_numbers[i].town_id == city_id.rows[0].id) {
-        current.push(reg_numbers[i])
-      }
-    }
-console.log(current);	
-
-res.render('home', {town_rows, filterTowns});
+res.render('home', {town_rows, filterTowns, reg_row});
 
   }
   catch (err) {
@@ -182,21 +121,26 @@ res.render('home', {town_rows, filterTowns});
 
 });
 
-app.post("/AddTown", async function (req, res) {
-  let towns = req.body.town;
+// Add Town
 
-  let tag = req.body.tag;
-  console.log(towns, tag)
 
-  // keep towns on screen
-  let town = await pool.query("select * from cities");
-  let town_rows = town.rows;
+// app.post("/AddTown", async function (req, res) {
+//   let towns = req.body.town;
+//   let tag = req.body.tag;
 
-  let city = await pool.query("select reg_number, town_id from registration_numbers");
-  let cities = city.rows;
+//   let addTown = await regNums.addTown(town, tag);
 
-  res.render("home", {town_rows})
-});
+//   console.log(towns, tag)
+
+//   // keep towns on screen
+//   let town = await pool.query("select * from cities");
+//   let town_rows = town.rows;
+
+//   let city = await pool.query("select reg_number, town_id from registration_numbers");
+//   let cities = city.rows;
+
+//   res.render("home", {town_rows})
+// });
 
 
 app.get("/reset", async function (req, res, next) {

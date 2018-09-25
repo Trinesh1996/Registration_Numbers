@@ -66,19 +66,15 @@ describe("Registration Tests", async function() {
         await reg.addReg("CA 1234");
 
         assert.deepEqual(await reg.filtering("CA"), ["CapeTown"])
-    })
-
-    it('should filter registrations based on specified town', async function() {
-        var reg = registration(pool);
-
-        await reg.addReg("CA 1234");       
-
-        assert.deepEqual(await reg.exFilterTown('CapeTown'), [{id: 1, reg_number: 'CA 1234', town_id: 1}]);
-
     });
 
+    it("should add towns", async function() {
+        var reg = registration(pool);
 
+        await reg.addTown("Cravenby", "CAW");
 
+        assert.deepEqual(await reg.checkTown(), [])
+    })
 
     after(function () {
         pool.end();

@@ -17,27 +17,24 @@ module.exports = function (pool) {
 		}
 	}
 
+	async function addTown(town, regprefix) {
+
+		if(town == undefined || town == "") {
+			return false;
+		}
+		let towns = await pool.query("SELECT * from cities where regprefix = $1", [regprefix]);
+		if (towns.rowCount === 0) {
+			let city_id = await pool.query("select id from cities where regprefix = $1", [regprefix]);
+			await pool.query("INSERT into cities (town, regprefix) values ($1, $2)", [town, regprefix]);
+		}
+		return true
+	}
+
 	async function checkRegistration(){
 		let result = await pool.query("SELECT reg_number from registration_numbers");
 		return result.rows;
 
 	}
-
-	async function selectTown(town){	
-		let towns = await pool.query(`SELECT registration_numbers.reg_number, registration_numbers.town_id, cities.regprefix, cities.town
-										FROM registration_numbers
-										INNER JOIN cities
-										ON cities.id = registration_numbers.town_id`);
- 
-		for (var i = 0; i < towns.rowCount; i++) {
-		  let cities = towns.rows[i];
-		  if (cities.startsWith === town) {
-			cities.selected = true;
-		  }
-		}
-		return towns.rows;
-	  }
-
 
 
 
@@ -49,40 +46,29 @@ module.exports = function (pool) {
 
 		let all = result.rows;
 
-		let regprefix = all.map(function(regpre) {
+		let regprefix = all.map(function(regpre) { 
 			return regpre.town;
 		})
 
 		return regprefix
 	}
 
-	async function filterTown(town){
-	
-		  let result = await pool.query('SELECT reg_number, town_id FROM registration_numbers');
-		  if (town !== 'All') {			
-			let foundTAG = await pool.query('SELECT id FROM cities WHERE regprefix = $1', [town]);
-			return result.rows.filter(current => current.town == foundTAG.rows[0].id);
-		  }
-		  return result.rows;
-		}
+	// async function exFilterTown(town) {
 
-	async function exFilterTown(town) {
+	// 	var current = []	
 
-		var current = []	
-
-		let reg_number = await pool.query("SELECT * from registration_numbers");
-		let reg_numbers = reg_number.rows;
+	// 	let reg_number = await pool.query("SELECT * from registration_numbers");
+	// 	let reg_numbers = reg_number.rows;
 		
-			let city_id = await pool.query("select id from cities where regprefix = $1", [town]);
+	// 		let city_id = await pool.query("select id from cities where regprefix = $1", [town]);
 
-			for (var i = 0; i<reg_numbers.length; i++) {
-				if (reg_numbers[i].town_id == city_id.rows[0].id) {
-					current.push(reg_numbers[i])
-				}
-			}
-			return current;
-
-		}
+	// 		for (var i = 0; i<reg_numbers.length; i++) {
+	// 			if (reg_numbers[i].town_id == city_id.rows[0].id) {
+	// 				current.push(reg_numbers[i])
+	// 			}
+	// 		}
+	// 		return current;
+	// 	}
 		
 
 	  
@@ -100,13 +86,21 @@ module.exports = function (pool) {
 		return reg_nums;
 	}
 
+	async function checkTown() {
+		let result = await pool.query("select * from cities");
+		return result.rows;
+	}
+
 	async function getTown(town) {
-		let result = await pool.query(`SELECT registration_numbers.reg_number, registration_numbers.town_id, cities.regprefix, cities.town
+
+		if(town != "All") {
+			let result = await pool.query(`SELECT registration_numbers.reg_number, registration_numbers.town_id, cities.regprefix, cities.town
 										FROM registration_numbers
 										INNER JOIN cities
 										ON cities.id = registration_numbers.town_id where town = $1`, [town]);
 
 		return result.rows;
+		}
 	}
 
 	async function getAllTowns(town) {
@@ -144,7 +138,7 @@ module.exports = function (pool) {
 	}
 
     return {
-		addReg,reset,checkRegistration,countReg,selectTown,getTown,checkReg,filtering,getAllTowns,checkAllReg,
-		filterTown, exFilterTown
+		addReg,addTown,reset,checkRegistration,countReg,getTown,checkReg,filtering,getAllTowns,checkAllReg,checkTown
+		
 	}
 }
