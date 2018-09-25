@@ -45,15 +45,12 @@ app.use(session({
 
 app.use(flash());
 
-
-
 app.get("/", async function (req, res, next) {
   try {
     // Keep town selection on screen
     var filterTowns = await regNums.getAllTowns();
-  res.render('home', {filterTowns});
+    res.render('home', {filterTowns});
   }
-
   catch (err) {
     console.log("error" + "" + err)
     next(err)
@@ -82,14 +79,12 @@ app.post("/AddRegistration", async function (req, res, next) {
       req.flash('msg-three', `Eg: CY 123, CA 123, CL 123, CJ 123`)      
     }
 
-
     if (reg_plate == undefined) {
       req.flash("msg", "Registration number already exits")
     } 
 
-    console.log(reg_plate)
-
-
+    console.log(reg_plate);
+    
     res.render('home', {reg_rows, filterTowns})
   }
 
@@ -97,6 +92,14 @@ app.post("/AddRegistration", async function (req, res, next) {
     console.log("error" + "" + err)
     next(err)
   }
+});
+
+app.get('/showAllReg', async function (req, res) {
+  let reg_rows = await regNums.checkAllReg();
+  var filterTowns = await regNums.getAllTowns();
+
+
+  res.render('home', {reg_rows, filterTowns});
 });
 
 app.get('/filter/:town', async function (req ,res, next) {

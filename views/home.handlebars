@@ -11,22 +11,17 @@
 
 <div class="container-fluid border">
      <div class="row margin-bottom">
-
          <div class="col-sm-12 error-color">
              <span class="">{{messages.msg}}</span>
          </div>
-
          
             <div class="col-12 error-color">
                 <span class=""><strong>{{messages.msg-three}}</strong></span>
             </div>
-        
-
 
           <div class="col-sm-12 error-color-2">
              <span class="">{{messages.msgTwo}}</span>
-         </div>
-        
+         </div>        
     </div>
     
     <div class="form-group row well">
@@ -85,7 +80,7 @@
 
     <div class="row">
         <div class="col-12">
-           <button onclick="showReg()" class    ="btn btn-success pull-right margin-top">Show</button>
+           <button onclick="showAllReg()" class="btn btn-success pull-right margin-top">Show All</button>
            <button type="button" class="btn btn-warning margin-top" data-toggle="modal" data-target="#resetModal">Reset</button>
          
                 <div id="regPlate">
@@ -138,10 +133,12 @@
         x.style.display = "none";
     }
 }
-
     function filters(){
         var town = document.querySelector('.custom-select').value;
         location.href = '/filter/' + town
+    }
+    function showAllReg() {
+        location.href = '/showAllReg'
     }
 
 </script>
