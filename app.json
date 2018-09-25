@@ -1,0 +1,8 @@
+{
+  "name": "Start on Heroku: Node.js",
+  "description": "A webapp from codex Registration Numbers",
+  "repository": "https://github.com/Trinesh1996/RegistrationNumbers_backend",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku","postgres"],
+  "image": "heroku/nodejs"
+}

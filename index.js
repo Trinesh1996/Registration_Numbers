@@ -79,7 +79,7 @@ app.post("/AddRegistration", async function (req, res, next) {
 
 
     if(reg_plate) {
-      req.flash('msg', 'added registration number succesfully')
+      req.flash('msgTwo', 'added registration number succesfully')
     }
     else {
       req.flash('msg', 'Please enter a registration number that is available')
