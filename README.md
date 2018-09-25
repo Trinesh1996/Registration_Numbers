@@ -8,6 +8,9 @@ Agenda:
 
 Create a simple web app that takes in a Registration number from a specific town and display it on screen.
 
+Link to heroku-app:
+https://registration-numbers.herokuapp.com/
+
 Tools:
 - PostgreSQL
 - NodeJS
