@@ -138,7 +138,17 @@ module.exports = function (pool) {
 	}
 
     return {
-		addReg,addTown,reset,checkRegistration,countReg,getTown,checkReg,filtering,getAllTowns,checkAllReg,checkTown
+		addReg,
+		addTown,
+		reset,
+		checkRegistration,
+		countReg,
+		getTown,
+		checkReg,
+		filtering,
+		getAllTowns,
+		checkAllReg,
+		checkTown
 		
 	}
 }
