@@ -46,7 +46,7 @@
   }
 
 
-.plate {
+.plate {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
   background-color: rgb(255, 255, 0);
   border-style: solid;
   border-color: black;
@@ -54,11 +54,16 @@
   max-width: 15%;
   font-weight: bold;
   font-size: 1.2em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-  margin-left: 1em;
-  margin-top: 1em;
+  padding-bottom: 0.2em; 
+  display: inline-block;
+  margin-left: 1.2em;
+  margin-right: 1.2em;
+  margin-top: 1.2em;        
+
+
+ 
 }
+
 
 .town {
   max-width: 20%;
@@ -80,6 +85,8 @@
 #regPlate { 
   padding: 50px 0;
   text-align: center; 
+  margin: 2em;
+ 
 }
 
 .color {

@@ -1,4 +1,4 @@
-<div class="container-fluid padding">
+<<div class="container-fluid padding">
     <div class="row">      
         <div class="col-12">
             <h1>Registration</h1>
@@ -29,7 +29,7 @@
         <label for="inputReg" class="col-sm-3 col-form-label">Registration Code</label>
 
         <div class="col-sm-6">
-            <input type="text" id="inputReg" name="regNum" value="{{regs}}" placeholder="..." class="form-control margin-left color"></input>
+            <input type="text" id="inputReg" pattern="[a-zA-Z0-9 ]+" title="Should not include any special characters" name="regNum" value="{{regs}}" placeholder="..." class="form-control margin-left color"></input>
         </div>
 
         <div class="col-sm-1">
@@ -82,10 +82,14 @@
         <div class="col-12">
            <button onclick="showAllReg()" class="btn btn-success pull-right margin-top">Show All</button>
            <button type="button" class="btn btn-warning margin-top" data-toggle="modal" data-target="#resetModal">Reset</button>
-         
-                <div id="regPlate">
-                    {{#each reg_rows}}
-                    <span class="plate">{{reg_number}}</span>
+        </div>
+    </div>
+
+    <div class="row">
+         <div class="col-12">
+             <div id="regPlate">
+                 {{#each reg_rows}}
+                    <p class="plate">{{reg_number}}</p>
                     {{/each}}
                     
                     {{#each reg_row}}
@@ -142,9 +146,3 @@
     }
 
 </script>
-
-
-
-
- 
-

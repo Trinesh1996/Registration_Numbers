@@ -1,12 +1,12 @@
 // Dependencies and Modules
 const express = require("express"),
-  bodyParser = require("body-parser"),
-  session = require("express-session"),
-  flash = require("express-flash"),
-  exphbs = require('express-handlebars'),
-  pg = require("pg"),
-  Pool = pg.Pool,
-  registrationPool = require("./public/registration");
+    bodyParser = require("body-parser"),
+    session = require("express-session"),
+    flash = require("express-flash"),
+    exphbs = require('express-handlebars'),
+    pg = require("pg"),
+    Pool = pg.Pool,
+    registrationPool = require("./public/registration");
 
 // init modules, env , port
 let app = express(),
