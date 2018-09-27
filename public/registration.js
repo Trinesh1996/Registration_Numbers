@@ -2,6 +2,9 @@ module.exports = function (pool) {
 	var reg_pre = ["All", "CA", "CY", "CL", "CJ"];
 
     async function addReg (reg) {
+
+		reg = reg.replace(/(\w{2})/, '$1 ');
+		
 		reg = reg.toUpperCase();
 		var regprefix = reg.substring(0, 2).trim();
 
